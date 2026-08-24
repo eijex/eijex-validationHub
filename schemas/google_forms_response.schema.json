@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Google Forms Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "temporary_submission_id",
+    "submitted_at",
+    "factorforge_version",
+    "optimization_profile",
+    "host_organism",
+    "protein_class",
+    "expression_system_assay_type",
+    "harvest_timepoint",
+    "replicate_category",
+    "comparison_result",
+    "expression_result",
+    "approximate_yield_range",
+    "consent_right_to_share",
+    "consent_no_prohibited_data",
+    "consent_internal_use",
+    "consent_public_summary"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "0.1.0"},
+    "temporary_submission_id": {"type": "string"},
+    "submitted_at": {"type": "string"},
+    "factorforge_version": {"type": "string"},
+    "optimization_profile": {"type": "string"},
+    "host_organism": {"type": "string"},
+    "protein_class": {"type": "string"},
+    "subcellular_targeting_category": {"type": "string"},
+    "promoter_category": {"type": "string"},
+    "expression_system_assay_type": {"type": "string"},
+    "native_sequence_control_status": {"type": "string"},
+    "harvest_timepoint": {"type": "string"},
+    "replicate_category": {
+      "type": "string",
+      "enum": ["not_reported", "single_observation", "2-3 replicates", "4-5 replicates", "gt_5 replicates"]
+    },
+    "comparison_result": {
+      "type": "string",
+      "enum": ["improved", "equivalent", "reduced", "inconclusive", "no_control", "not_reported"]
+    },
+    "expression_result": {
+      "type": "string",
+      "enum": ["detected", "not_detected", "weak", "strong", "inconclusive", "not_reported"]
+    },
+    "approximate_yield_range": {
+      "type": "string",
+      "enum": [
+        "not_reported",
+        "below_detection",
+        "lt_0_01_mg_g_fw",
+        "0_01_to_0_1_mg_g_fw",
+        "0_1_to_1_mg_g_fw",
+        "1_to_5_mg_g_fw",
+        "gt_5_mg_g_fw",
+        "other_coarse_range"
+      ]
+    },
+    "non_confidential_construct_alias": {"type": "string"},
+    "non_confidential_notes": {"type": "string"},
+    "consent_right_to_share": {"type": "boolean"},
+    "consent_no_prohibited_data": {"type": "boolean"},
+    "consent_internal_use": {"type": "boolean"},
+    "consent_public_summary": {"type": "boolean"}
+  }
+}

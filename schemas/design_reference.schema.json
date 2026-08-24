@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design_reference.schema.json",
+  "title": "Design Reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reference_type",
+    "design_package_id",
+    "factorforge_version"
+  ],
+  "properties": {
+    "reference_type": {"type": "string", "const": "factorforge_design_package"},
+    "design_package_id": {"type": "string"},
+    "factorforge_version": {"type": "string"}
+  }
+}

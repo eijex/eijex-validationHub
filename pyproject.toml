@@ -1,0 +1,24 @@
+[project]
+name = "validationhub"
+version = "0.0.1"
+description = "Open-source evidence registry for public-safe FactorForge validation feedback."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "jsonschema>=4.0.0",
+    "ruff>=0.4.0"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = []

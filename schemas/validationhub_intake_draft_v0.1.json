@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Internal draft. Public sanitized copy: factorforge-cds/docs/validationhub/intake_schema_v0.1.public.json. IMPORTANT: public unsalted sequence_hash is prohibited in intake records (see prohibited_fields.json conditionally_prohibited_field_names). Internal salted/HMAC fingerprints in private pipelines are allowed. Use design_package_id as the public linkage key. design_package.json/evidence.sequence_hash is allowed — that is a different context (internal artifact, not intake record).",
+  "title": "ValidationHub Computational Intake Record v0.1",
+  "description": "Internal schema for FactorForge computational validation records. Separates computational results from experimental outcomes. Does not collect raw sequences or identifiers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "design_package_id",
+    "evidence_type",
+    "host_organism",
+    "computational"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0",
+      "$comment": "Bump when any required field is added/removed/renamed. See docs/SCHEMA_VERSIONING.md."
+    },
+    "design_package_id": {
+      "type": "string",
+      "$comment": "The design_id from the corresponding FactorForge Design Package (design_package.json). This is the primary link between the intake record and the computational artifact. Do not use sequence_hash here (prohibited)."
+    },
+    "sequence_publication_source": {
+      "type": "string",
+      "$comment": "Citation for the public amino-acid sequence used as optimizer input. For the sfGFP worked example: 'Pédelacq et al. 2006, Nat Biotechnol 24:79-88, PMID 16369541'. Not required for benchmark_reference records."
+    },
+    "public_example_id": {
+      "type": "string",
+      "$comment": "Stable identifier for a publicly documented example run. Format: {protein}_{profile}_seed{seed}_{host}_v{n}."
+    },
+    "host_organism": {
+      "type": "string",
+      "$comment": "Full scientific or common name. e.g., 'Nicotiana benthamiana'. Must match the host_profile used in the Design Package."
+    },
+    "evidence_type": {
+      "type": "string",
+      "enum": ["computational_validation", "wetlab_observation", "benchmark_reference"],
+      "$comment": "Discriminator field. computational_validation = optimizer output only. wetlab_observation = experimental result exists. benchmark_reference = record derived from formal benchmark run."
+    },
+    "computational": {
+      "type": "object",
+      "additionalProperties": false,
+      "$comment": "Scoring contract v1.1 fields. gc_in_target_range and multi_constraint_pass are the key fields for linking to benchmark evidence. gc_min=55.0, gc_max=65.0 for N. benthamiana.",
+      "required": [
+        "scoring_contract_version",
+        "gc_in_target_range",
+        "multi_constraint_pass",
+        "multi_constraint_pass_definition"
+      ],
+      "properties": {
+        "scoring_contract_version": {
+          "type": "string",
+          "$comment": "Current: 'v1.1'. v1.0 omitted gc_in_target_range from multi_constraint_pass — do not use v1.0 records without recomputing with canonical_multi_constraint_pass()."
+        },
+        "gc_in_target_range": {
+          "type": "boolean",
+          "$comment": "Primitive: computed as gc_min <= gc_percent <= gc_max. For N. benthamiana: 55.0 <= gc_percent <= 65.0. Never derived from multi_constraint_pass."
+        },
+        "multi_constraint_pass": {
+          "type": "boolean",
+          "$comment": "Derived field: biological_pass AND assembly_pass AND gc_in_target_range (scoring_contract v1.1). MUST NOT be asserted manually. Always computed from the three primitives."
+        },
+        "multi_constraint_pass_definition": {
+          "type": "string",
+          "const": "biological_pass AND assembly_pass AND gc_in_target_range",
+          "$comment": "Canonical 3-primitive definition string (scoring_contract v1.1). const enforces exact match. Changing this requires a scoring_contract version bump. Expanded 5-primitive form: aa_identity==1.0 AND internal_stop_count==0 AND invalid_codon_count==0 AND gc_in_target_range==true AND forbidden_type_iis_site_count==0 (where biological_pass = aa_identity==1.0 AND internal_stop_count==0 AND invalid_codon_count==0; assembly_pass = forbidden_type_iis_site_count==0)."
+        }
+      }
+    },
+    "experimental": {
+      "type": "object",
+      "$comment": "Wet-lab outcome section. For computational-only records, outcome_status should be 'not_tested'. This section is optional in v0.1; will become required in future versions when wet-lab feedback is collected.",
+      "properties": {
+        "assay_type": {
+          "type": "string",
+          "$comment": "e.g., 'western_blot', 'fluorescence_microscopy', 'dot_blot', 'not_provided'."
+        },
+        "outcome_status": {
+          "type": "string",
+          "enum": ["not_tested", "pass", "fail", "partial"],
+          "$comment": "not_tested = no wet-lab performed. pass = expression confirmed. fail = no expression. partial = expression below threshold or ambiguous."
+        }
+      }
+    }
+  }
+}

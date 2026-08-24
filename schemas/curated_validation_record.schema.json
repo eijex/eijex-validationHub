@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Curated Validation Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "validation_record_id",
+    "curated_at",
+    "curated_by",
+    "design_reference",
+    "provenance_relations",
+    "factorforge_version",
+    "optimization_profile",
+    "host_organism",
+    "protein_class",
+    "expression_system_assay_type",
+    "harvest_timepoint",
+    "replicate_category",
+    "comparison_result",
+    "expression_result",
+    "approximate_yield_range",
+    "consent_public_summary",
+    "review_status"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "0.2.0"},
+    "validation_record_id": {"type": "string"},
+    "curated_at": {"type": "string"},
+    "curated_by": {"type": "string"},
+    "design_reference": {"$ref": "design_reference.schema.json"},
+    "provenance_relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "relation_type",
+          "target_record_type",
+          "target_record_id"
+        ],
+        "properties": {
+          "relation_type": {"type": "string", "enum": ["wasDerivedFrom"]},
+          "target_record_type": {"type": "string"},
+          "target_record_id": {"type": "string"}
+        }
+      }
+    },
+    "factorforge_version": {"type": "string"},
+    "optimization_profile": {"type": "string"},
+    "host_organism": {"type": "string"},
+    "protein_class": {"type": "string"},
+    "expression_system_assay_type": {"type": "string"},
+    "harvest_timepoint": {"type": "string"},
+    "replicate_category": {"type": "string"},
+    "comparison_result": {"type": "string"},
+    "expression_result": {"type": "string"},
+    "approximate_yield_range": {"type": "string"},
+    "non_confidential_construct_alias": {"type": "string"},
+    "non_confidential_notes": {"type": "string"},
+    "consent_public_summary": {"type": "boolean"},
+    "review_status": {"type": "string", "enum": ["draft", "rejected", "public_candidate", "published"]},
+    "reviewer_notes": {"type": "string"}
+  }
+}

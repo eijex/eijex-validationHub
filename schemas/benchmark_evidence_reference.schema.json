@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Benchmark Evidence Reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_run_id",
+    "artifact_uri",
+    "manifest_digest"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "0.1.0"},
+    "benchmark_run_id": {"type": "string"},
+    "artifact_uri": {"type": "string"},
+    "manifest_digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value",
+        "scope"
+      ],
+      "properties": {
+        "algorithm": {"type": "string", "const": "sha256"},
+        "value": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "scope": {"type": "string", "const": "manifest_only"}
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.2.0",
+  "validation_record_id": "validation-record-synthetic-001",
+  "curated_at": "2026-07-03T10:00:00Z",
+  "curated_by": "reviewer-001",
+  "design_reference": {
+    "reference_type": "factorforge_design_package",
+    "design_package_id": "dp-synthetic-001",
+    "factorforge_version": "3.2.0"
+  },
+  "provenance_relations": [
+    {
+      "relation_type": "wasDerivedFrom",
+      "target_record_type": "intake_record",
+      "target_record_id": "intake-synthetic-001"
+    }
+  ],
+  "factorforge_version": "3.2.0",
+  "optimization_profile": "balanced",
+  "host_organism": "Nicotiana benthamiana",
+  "protein_class": "reporter",
+  "expression_system_assay_type": "synthetic_assay",
+  "harvest_timepoint": "not_reported",
+  "replicate_category": "single_observation",
+  "comparison_result": "not_reported",
+  "expression_result": "not_reported",
+  "approximate_yield_range": "not_reported",
+  "non_confidential_construct_alias": "synthetic-alias-001",
+  "non_confidential_notes": "Synthetic fixture only.",
+  "consent_public_summary": false,
+  "review_status": "draft",
+  "reviewer_notes": "Synthetic fixture only."
+}

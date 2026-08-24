@@ -1,0 +1,26 @@
+{
+  "prohibited_field_names": [
+    "raw_sequence",
+    "sequence",
+    "dna_sequence",
+    "rna_sequence",
+    "protein_sequence",
+    "amino_acid_sequence",
+    "construct_sequence",
+    "customer_sequence",
+    "proprietary_sequence",
+    "construct_id",
+    "internal_batch_id",
+    "customer_construct_id",
+    "protein_name",
+    "submitter_name",
+    "submitter_email",
+    "respondent_email",
+    "contact_email",
+    "phone_number",
+    "personal_identifier"
+  ],
+  "conditionally_prohibited_field_names": {
+    "sequence_hash": "PUBLIC intake records: an unsalted hash derived directly from raw_sequence is prohibited — it functions as a sequence proxy and enables de-anonymization. INTERNAL/private artifacts (e.g., design_package.json internal fields): a salted HMAC fingerprint is allowed when NOT co-transmitted with raw_sequence. Use design_package_id as the public linkage key in all intake records."
+  }
+}

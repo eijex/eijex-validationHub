@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Intake Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "intake_record_uuid",
+    "temporary_submission_id",
+    "created_at",
+    "record"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "const": "0.1.0"},
+    "intake_record_uuid": {"type": "string"},
+    "temporary_submission_id": {"type": "string"},
+    "created_at": {"type": "string"},
+    "record": {"$ref": "validation_survey_record.schema.json"}
+  }
+}
