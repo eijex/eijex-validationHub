@@ -56,7 +56,7 @@ This scaffold assumes Google Forms automatic email collection, response summarie
 
 ## SQL / Neon Status
 
-This scaffold does not connect to Neon/Postgres or any live database. Database integration is reserved for a later explicit change.
+The default registry does not connect to a networked database. An explicitly configured, optional PostgreSQL measurement adapter is described in [POSTGRES_ADAPTER.md](docs/POSTGRES_ADAPTER.md); dependencies and migrations are separate from the default install.
 
 ## Quick Setup
 

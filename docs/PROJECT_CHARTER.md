@@ -27,13 +27,21 @@ artifacts.
   change log. See "Local File-Based Registry Exception" below for the boundary
   that keeps this distinct from the Non-Scope "live database" prohibition.
 
-## Non-Scope
+## Explicit Optional PostgreSQL Exception (2026-10-08, Job 368)
+
+User-authorized engineering repair adds an opt-in measurement adapter using the
+independently installed pinned shared package and migrated schema. Default registry
+behavior and public-summary consent/review policy remain unchanged. Only reviewed
+minimal permissioned records may use this adapter; no hosted service or production
+DB is provisioned. See [POSTGRES_ADAPTER.md](POSTGRES_ADAPTER.md).
+
+## Default Scaffold Non-Scope
 
 - No web app.
 - No prediction model.
 - No live Neon/Postgres database, and no networked/served database of any kind.
 - No Google Forms or Drive connector.
-- No real wet-lab data processing.
+- No automatic intake of unreviewed real wet-lab records.
 - No public publication automation.
 
 ## Local File-Based Registry Exception (Registry v0)
@@ -80,5 +88,5 @@ Future work may evaluate private Neon/Postgres storage. This scaffold remains fi
 ## Acceptance Criteria
 
 The scaffold exists, tests pass locally, prohibited fields are excluded from schemas,
-no networked/live database integration is added (local file-based Registry v0 per the
-exception above is allowed), and public output remains manual-review only.
+default installation has no networked connection; the explicit optional adapter
+follows its pinned schema, identity and transaction contract, and public output remains manual-review only.

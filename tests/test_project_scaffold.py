@@ -67,7 +67,7 @@ def test_no_forbidden_directories_or_automation() -> None:
 def test_text_files_are_utf8_lf_no_bom_final_newline() -> None:
     suffixes = {".md", ".json", ".py", ".sql", ".csv", ".toml"}
     named = {".gitattributes", ".gitignore", "LICENSE"}
-    generated_dirs = {".git", ".pytest_cache", ".ruff_cache", "validationhub.egg-info"}
+    generated_dirs = {".git", ".venv", ".pytest_cache", ".ruff_cache", "validationhub.egg-info"}
     for path in ROOT.rglob("*"):
         if generated_dirs.intersection(path.parts) or not path.is_file():
             continue

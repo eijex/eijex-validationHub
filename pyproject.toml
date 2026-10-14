@@ -1,11 +1,12 @@
 [project]
 name = "validationhub"
-version = "0.0.1"
+version = "0.0.2"
 description = "Open-source evidence registry for public-safe FactorForge validation feedback."
 requires-python = ">=3.10"
 dependencies = []
 
 [project.optional-dependencies]
+postgres = ["sqlalchemy>=2.0", "psycopg2-binary>=2.9", "eijex-db-core==0.1.2"]
 dev = [
     "pytest>=8.0.0",
     "jsonschema>=4.0.0",
@@ -14,6 +15,7 @@ dev = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
 
 [tool.ruff]
 line-length = 100
